@@ -179,7 +179,7 @@ public class RoomEditView extends Layout {
     private void saveOrUpdateHotel() {
         // Check if any required field is empty
         if (Helper.isFieldListEmpty(new JTextField[]{fld_room_number, fld_stock, fld_capacity, fld_square_meters, fld_beds_count, fld_child_price, fld_adult_price})) {
-            Helper.getMessage("Not Null", "Error");
+            Helper.getMessage("Not Null", "Error");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
         } else {
             // If room ID is not 0, update room details
             if (room.getRoom_id() != 0) {
@@ -192,7 +192,7 @@ public class RoomEditView extends Layout {
     }
 
     // Method to update room details
-    private void updateRoom() {
+    private void updateRoom() { // Seciton 13-14 : Agency staff can add rooms to hotels registered in the system. The prices of the newly added rooms are determined according to the season, hostel type and whether the guests are adults or children.
         // Get selected hotel ID from combo box
         ComboItem items = (ComboItem) cmb_hotel_name.getSelectedItem();
         room.setRoom_hotel_id(items.getKey());
@@ -217,12 +217,12 @@ public class RoomEditView extends Layout {
         roomManager.update(room);
 
         // Show confirmation message
-        Helper.getMessage("Update", "Information");
+        Helper.getMessage("Update", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
         btn_back.setText("Back");
     }
 
     // Method to save room details
-    private void saveRoom() {
+    private void saveRoom() { // Seciton 13-14 : Agency staff can add rooms to hotels registered in the system. The prices of the newly added rooms are determined according to the season, hostel type and whether the guests are adults or children.
         // Get selected hotel ID from combo box
         ComboItem items = (ComboItem) cmb_hotel_name.getSelectedItem();
         room.setRoom_hotel_id(items.getKey());
@@ -246,7 +246,7 @@ public class RoomEditView extends Layout {
         // Check if pansion type or season is empty
         if (cmb_pansion_type.getSelectedItem() == null || cmb_seasson.getSelectedItem() == null) {
             // Show error message and exit
-            Helper.getMessage("Pansion or Season type is empty, please check hotel edit page", "Information");
+            Helper.getMessage("Pansion or Season type is empty, please check hotel edit page", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
             btn_save.setVisible(false);
             btn_back.setText("Exit");
             // Action listener for exit button
@@ -266,7 +266,7 @@ public class RoomEditView extends Layout {
             // Save room in database
             roomManager.save(room);
             // Show confirmation message
-            Helper.getMessage("Saved", "Information");
+            Helper.getMessage("Saved", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
             btn_back.setText("Back");
         }
     }

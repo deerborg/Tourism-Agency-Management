@@ -63,31 +63,30 @@ public class HotelView extends Layout {
         add(container);
         pageArt(1500, 700, "Hotel Management");
 
-        hotelTableLoad(); // Otel tablosu oluşturma
+        hotelTableLoad();//Create hotel table
         roomTableLoad(); // Room tablosu oluşturma
-        hotelEditButtons(); // Otel için buton eventleri
-        pansionsTableLoad(); // pansion tablosu oluşturma
+        hotelEditButtons(); // Creating a Room table
+        pansionsTableLoad(); // Creating a hostel table
         pansionsEditButton(); // pansion için buton eventleri
-        roomEditButtons(); // room tablosu eventleri
-        filterForHotel(); // odaları otele göre filtreleme
-        seasonTableLoad(); // season tablosunu olusturma
-        seasonEditButtons(); // Sezonlar için buton eventleri
-        getTheme(); // Kullanıcının sayfa içinde tema değiştirmesi
-        filterRoom(); // Oda filtreleme
+        roomEditButtons(); // Button events for hostel
+        filterForHotel(); // filter rooms by hotel
+        seasonTableLoad(); // Creating the season table
+        seasonEditButtons(); // Button events for seasons
+        getTheme(); // User changing theme within the page
+        filterRoom(); // Room filtering
 
-        // Yetkili kullanıcı adı gösterme
+        // Show authorized user name
         lbl_welcome.setText(lbl_welcome.getText() + " " + user.getUser_name());
     }
 
-    //--------------------------------------- Hotel Pane ---------------------------------------------
 
-    // Otel tablosu oluşturma
+    // Create a hotel table
     public void hotelTableLoad() {
         model = (DefaultTableModel) tbl_hotel.getModel();
 
         model.setRowCount(0);
 
-        // Otel tablosuna databaseden verileri ekleme
+        // Adding data from the database to the hotel table
         Object[] columns = {"ID", "Name", "City", "Region", "Adress", "Email", "Phone", "Rating", "Parking", "WI-FI", "Pool", "Fitness Center", "Concierge", "SPA", "Services", "Pansion Type"};
         model.setColumnIdentifiers(columns);
 
@@ -101,8 +100,7 @@ public class HotelView extends Layout {
                     hotelList.isHotel_concierge() ? "Yes" : "No", hotelList.isHotel_spa() ? "Yes" : "No", hotelList.isHotel_room_services() ? "Yes" : "No", pansionTypes};
             model.addRow(info);
         }
-
-        // Tablo sutun genişliği
+        //Table column width
         tbl_hotel.getColumnModel().getColumn(0).setPreferredWidth(30);
         tbl_hotel.getColumnModel().getColumn(1).setPreferredWidth(180);
         tbl_hotel.getColumnModel().getColumn(2).setPreferredWidth(74);
@@ -120,16 +118,14 @@ public class HotelView extends Layout {
         tbl_hotel.getColumnModel().getColumn(14).setPreferredWidth(80);
         tbl_hotel.getColumnModel().getColumn(15).setPreferredWidth(180);
 
-        // Tablo editlenemez ve yeniden boyutlandırılamaz hale getirir
+        //Makes the table uneditable and resizable
         tbl_hotel.setEnabled(false);
         tbl_hotel.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbl_hotel.getTableHeader().setResizingAllowed(false);
         tbl_hotel.getTableHeader().setReorderingAllowed(false);
     }
 
-    //----------------- Hotel Button Events
-
-    // Mouse ile tıklama sırasında row bilgisi alma
+    // Getting row information during mouse click
     public void hotelEditButtons() {
         tbl_hotel.addMouseListener(new MouseAdapter() {
             @Override
@@ -139,19 +135,19 @@ public class HotelView extends Layout {
             }
         });
 
-        // Hotel güncelleme
+        // Hotel update
         btn_edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (tbl_hotel.getSelectedRow() < 0) { // Eğer tablo içinden değer seçmez ise
-                    Helper.getMessage("Please select a Hotel", "Error"); // bilgilendirme mesajı
+                if (tbl_hotel.getSelectedRow() < 0) { //If it does not select a value from the table
+                    Helper.getMessage("Please select a Hotel", "Error");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 } else {
                     int selectId = (int) tbl_hotel.getValueAt(tbl_hotel.getSelectedRow(), 0);
                     HotelEditView a = new HotelEditView(hotelManager.getById(selectId));
                     a.addWindowListener(new WindowAdapter() {
                         @Override
                         public void windowClosed(WindowEvent e) {
-                            // Güncelleme işlemi tamamlandığında tabloları yeniler
+                            //Refreshes the tables when the update process is complete
                             hotelTableLoad();
                             filterRoom();
                             filterForHotel();
@@ -162,7 +158,7 @@ public class HotelView extends Layout {
                 }
             }
         });
-        // Hotel ekleme
+        //Adding a hotel
         btn_new.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -170,7 +166,7 @@ public class HotelView extends Layout {
                 hotelEditView.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        // Kaydetme işlemi tamamlandığında tabloları yeniler
+                        //Refreshes tables when save is complete
                         hotelTableLoad();
                         filterRoom();
                         filterForHotel();
@@ -180,43 +176,41 @@ public class HotelView extends Layout {
                 });
             }
         });
-        //  Cancel işlemi
+        //  Cancel button
         btn_back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
         });
-        // Hotel silme işlemi
+        // Hotel deletion process
         btn_delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectId = (int) tbl_hotel.getValueAt(tbl_hotel.getSelectedRow(), 0);
-                if (JOptionPane.showConfirmDialog(null, "Deleted a Hotel", "Confirm", JOptionPane.YES_NO_OPTION) == 0) { // Silme işlemi için kullanıcıdan onay olma
+                if (JOptionPane.showConfirmDialog(null, "Deleted a Hotel", "Confirm", JOptionPane.YES_NO_OPTION) == 0) { // Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                     hotelManager.delete(selectId);
-                    // Silme işlemi tamamlandığında tabloları yeniler
+                    // Refreshes tables when deletion is complete
                     seasonTableLoad();
                     roomTableLoad();
                     hotelTableLoad();
                     filterRoom();
                     filterForHotel();
                 } else {
-                    Helper.getMessage("Canceled", "Information"); // Silme işleminin gerçekleştiğine dair kullanıcıya verilen mesaj
+                    Helper.getMessage("Canceled", "Information"); // Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 }
             }
         });
     }
 
-//------------------------------- Room Pane ------------------------------------------
-
-    // Room tablosu oluşturma
+    //Creating a Room table
     public void roomTableLoad() {
 
         model = (DefaultTableModel) tbl_rooms.getModel();
 
         model.setRowCount(0);
 
-        // Room tablosuna databaseden verileri ekleme
+        // Adding data from the database to the Room table
         Object[] columns = {"Hotel ID", "ID", "Seasson", "Pansion Type", "Room Type", "Room Number", "Capacity", "Adult Price", "Child Price", "Stock", "Beds", "M2", "TV", "Mini Bar", "XBOX", "Safe Box", "Projector"};
         model.setColumnIdentifiers(columns);
 
@@ -227,7 +221,7 @@ public class HotelView extends Layout {
                     roomList.isRoom_has_gaming_console() ? "Yes" : "No", roomList.isRoom_has_safe_box() ? "Yes" : "No", roomList.isRoom_has_projector() ? "Yes" : "No"};
             model.addRow(info);
         }
-        // Tablo sutun genişliği
+        //Table column width
         tbl_rooms.getColumnModel().getColumn(0).setPreferredWidth(50);
         tbl_rooms.getColumnModel().getColumn(1).setPreferredWidth(30);
         tbl_rooms.getColumnModel().getColumn(2).setPreferredWidth(74);
@@ -247,16 +241,14 @@ public class HotelView extends Layout {
         tbl_rooms.getColumnModel().getColumn(16).setPreferredWidth(80);
 
 
-        // Tablo editlenemez ve yeniden boyutlandırılamaz hale getirir
+        // Makes the table uneditable and resizable
         tbl_rooms.setEnabled(false);
         tbl_rooms.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbl_rooms.getTableHeader().setResizingAllowed(false);
         tbl_rooms.getTableHeader().setReorderingAllowed(false);
     }
 
-    //------------ Room Button Events
-
-    // Room row seçimi
+    // Room row selection
     public void roomEditButtons() {
         tbl_rooms.addMouseListener(new MouseAdapter() {
             @Override
@@ -266,12 +258,12 @@ public class HotelView extends Layout {
             }
         });
 
-        // Room güncelleme
+        //Room update
         btn_edit_room.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (tbl_rooms.getSelectedRow() < 0) { // Eğer tablo içinden değer seçmez ise
-                    Helper.getMessage("Please select a Room", "Error"); // bilgilendirme mesajı
+                if (tbl_rooms.getSelectedRow() < 0) { // If it does not select a value from the table
+                    Helper.getMessage("Please select a Room", "Error"); // Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 } else {
                     int selectId = (int) tbl_rooms.getValueAt(tbl_rooms.getSelectedRow(), 1);
                     System.out.println(selectId);
@@ -310,22 +302,22 @@ public class HotelView extends Layout {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectId = (int) tbl_rooms.getValueAt(tbl_rooms.getSelectedRow(), 1);
-                if (tbl_rooms.getSelectedRow() < 0) { // Eğer tablo içinden değer seçmez ise
-                    Helper.getMessage("Please select a Room", "Error"); // bilgilendirme mesajı
+                if (tbl_rooms.getSelectedRow() < 0) { // If it does not select a value from the table
+                    Helper.getMessage("Please select a Room", "Error"); // Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 }
-                if (JOptionPane.showConfirmDialog(null, "Deleted a Room", "Confirm", JOptionPane.YES_NO_OPTION) == 0) { // Silme işleminin gerçekleşmesi için onay mesajı
+                if (JOptionPane.showConfirmDialog(null, "Deleted a Room", "Confirm", JOptionPane.YES_NO_OPTION) == 0) { // Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                     roomManager.delete(selectId);
                     roomTableLoad();
                 } else {
-                    Helper.getMessage("Canceled", "Information"); // Silme işleminin gerçekleştiğine dair bilgilendirme mesajı
+                    Helper.getMessage("Canceled", "Information"); // Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 }
             }
         });
     }
 
-    // Hotel arama
+    //Hotel search
     public void filterRoom() {
-        // Select butonu
+        // Select button
         btn_select_hotel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -349,15 +341,15 @@ public class HotelView extends Layout {
             }
         });
 
-        // List All butonu
+        //List All button
         btn_list_all.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                roomTableLoad(); // Bütün room verilerini getirir
+                roomTableLoad(); // Returns all room data
             }
         });
 
-        // Sekmeye basıldığı anda yenileme işlemine başlar
+        //Starts the refresh process as soon as the tab is pressed
         tabbedPane1.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -366,7 +358,7 @@ public class HotelView extends Layout {
         });
     }
 
-    // Filtreleme işlemleri için combobox item ekleme- Hotel
+    //Adding combobox items for filtering operations - Hotel
     public void filterForHotel() {
         cmb_select_hotel.removeAllItems();
         for (Hotel hotel : hotelManager.findByAll()) {
@@ -374,9 +366,7 @@ public class HotelView extends Layout {
         }
     }
 
-    //----------------------------------------------Pane Season---------------------------------------------------------
-
-    // Pansiyon tablosu oluşturma
+    //Creating a hostel table
     public void pansionsTableLoad() {
         model = (DefaultTableModel) tbl_pansions.getModel();
 
@@ -389,19 +379,18 @@ public class HotelView extends Layout {
             Object[] info = {pansionList.getPansion_id(), pansionList.getPansion_type()};
             model.addRow(info);
         }
-        // Tablo sutun genişliği
+        //Table column width
         tbl_rooms.getColumnModel().getColumn(0).setPreferredWidth(30);
         tbl_rooms.getColumnModel().getColumn(1).setPreferredWidth(180);
 
 
-        // Tablo editlenemez ve yeniden boyutlandırılamaz hale getirir
+        //Makes the table uneditable and resizable
         tbl_rooms.setEnabled(false);
         tbl_rooms.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbl_rooms.getTableHeader().setResizingAllowed(false);
         tbl_rooms.getTableHeader().setReorderingAllowed(false);
     }
 
-    //------------Pansion Button Events
     public void pansionsEditButton() {
         tbl_pansions.addMouseListener(new MouseAdapter() {
             @Override
@@ -411,12 +400,12 @@ public class HotelView extends Layout {
             }
         });
 
-        // Pansion güncelleme
+        //hostel update
         btn_edit_pansion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (tbl_pansions.getSelectedRow() < 0) { // Eğer tablo içinden değer seçmez ise
-                    Helper.getMessage("Please select a Pansion", "Error"); // bilgilendirme mesajı
+                if (tbl_pansions.getSelectedRow() < 0) { // If it does not select a value from the table
+                    Helper.getMessage("Please select a Pansion", "Error"); // Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 } else {
                     int selectId = (int) tbl_pansions.getValueAt(tbl_pansions.getSelectedRow(), 0);
                     PansionEditView a = new PansionEditView(pansionManager.getById(selectId));
@@ -454,19 +443,17 @@ public class HotelView extends Layout {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectId = (int) tbl_pansions.getValueAt(tbl_pansions.getSelectedRow(), 0);
-                if (JOptionPane.showConfirmDialog(null, "Deleted a Pansion", "Confirm", JOptionPane.YES_NO_OPTION) == 0) {
+                if (JOptionPane.showConfirmDialog(null, "Deleted a Pansion", "Confirm", JOptionPane.YES_NO_OPTION) == 0) {// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                     pansionManager.delete(selectId);
                     pansionsTableLoad();
                 } else {
-                    Helper.getMessage("Canceled", "Information");
+                    Helper.getMessage("Canceled", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 }
             }
         });
     }
 
-    //-------------------------------- Season Pane -------------------------------------------
-
-    // Season tablosu oluşturma
+    // Creating a season table
     public void seasonTableLoad() {
         model = (DefaultTableModel) tbl_seasson.getModel();
 
@@ -479,14 +466,14 @@ public class HotelView extends Layout {
             Object[] info = {seasonList.getSeason_id(), hotelManager.getById(seasonList.getSeason_hotel_id()).getHotel_name(), seasonList.getSeason_start_date(), seasonList.getSeason_end_date(), seasonList.getSeasonName()};
             model.addRow(info);
         }
-        // Tablo sutun genişliği
+        //Table column width
         tbl_seasson.getColumnModel().getColumn(0).setPreferredWidth(30);
         tbl_seasson.getColumnModel().getColumn(1).setPreferredWidth(100);
         tbl_seasson.getColumnModel().getColumn(2).setPreferredWidth(100);
         tbl_seasson.getColumnModel().getColumn(3).setPreferredWidth(100);
         tbl_seasson.getColumnModel().getColumn(4).setPreferredWidth(100);
 
-        // Tablo editlenemez ve yeniden boyutlandırılamaz hale getir
+        // Make table non-editable and non-resizable
         tbl_hotel.setEnabled(false);
         tbl_hotel.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbl_hotel.getTableHeader().setResizingAllowed(false);
@@ -506,8 +493,8 @@ public class HotelView extends Layout {
         btn_edit_season.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (tbl_seasson.getSelectedRow() < 0) { // Eğer tablo içinden değer seçmez ise
-                    Helper.getMessage("Please select a Hotel", "Error"); // bilgilendirme mesajı
+                if (tbl_seasson.getSelectedRow() < 0) { // If it does not select a value from the table
+                    Helper.getMessage("Please select a Hotel", "Error"); // Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 } else {
                     int selectId = (int) tbl_seasson.getValueAt(tbl_seasson.getSelectedRow(), 0);
                     SeasonEditView a = new SeasonEditView(seasonManager.getById(selectId));
@@ -545,34 +532,34 @@ public class HotelView extends Layout {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectId = (int) tbl_seasson.getValueAt(tbl_seasson.getSelectedRow(), 0);
-                if (JOptionPane.showConfirmDialog(null, "Deleted a Season", "Confirm", JOptionPane.YES_NO_OPTION) == 0) {
+                if (JOptionPane.showConfirmDialog(null, "Deleted a Season", "Confirm", JOptionPane.YES_NO_OPTION) == 0) {// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                     seasonManager.delete(selectId);
                     seasonTableLoad();
                 } else {
-                    Helper.getMessage("Canceled", "Information");
+                    Helper.getMessage("Canceled", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 }
             }
         });
     }
 
-    // Uygulama içinde tema değiştirme
+    //Changing theme within the app
     public void getTheme() {
         // Tema isimlerini ComboBox'a ekleme
         for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
             cmb_theme_list.addItem(info.getName());
         }
 
-        // ComboBox'tan tema seçildiğinde temayı değiştirme
+        //Changing theme when theme is selected from ComboBox
         cmb_theme_list.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     String selectedThemeName = cmb_theme_list.getSelectedItem().toString();
-                    // ComboBox'tan seçilen tema ismine göre temayı değiştirme
+                    //Changing the theme based on the theme name selected from ComboBox
                     for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                         if (selectedThemeName.equals(info.getName())) {
                             UIManager.setLookAndFeel(info.getClassName());
-                            SwingUtilities.updateComponentTreeUI(container); // UI güncelleme
+                            SwingUtilities.updateComponentTreeUI(container); // UI update
                             break;
                         }
                     }

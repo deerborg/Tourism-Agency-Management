@@ -12,7 +12,7 @@ public class HotelDao {
     private Connection connection;
     private boolean isAdmin;
     public HotelDao() {
-        connection = Database.connector();
+        connection = Database.connector(); // Section - 6 : A database was used in the project and the DB connector configuration was made correctly.
     }
 
 

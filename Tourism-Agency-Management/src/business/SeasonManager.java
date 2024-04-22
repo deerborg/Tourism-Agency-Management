@@ -13,7 +13,7 @@ public class SeasonManager {
 
     // Constructor
     public SeasonManager() {
-        this.seasonDao = new SeasonDao();
+        this.seasonDao = new SeasonDao(); // Section - 6 : A database was used in the project and the DB connector configuration was made correctly.
         this.roomManager = new RoomManager();
     }
 

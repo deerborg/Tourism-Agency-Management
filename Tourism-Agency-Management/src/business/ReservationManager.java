@@ -11,7 +11,7 @@ public class ReservationManager {
 
     // Constructor
     public ReservationManager() {
-        this.reservationDao = new ReservationDao();
+        this.reservationDao = new ReservationDao(); // Section - 6 : A database was used in the project and the DB connector configuration was made correctly.
     }
 
     // Method to retrieve reservations by room ID

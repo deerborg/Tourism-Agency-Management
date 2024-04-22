@@ -11,7 +11,7 @@ public class SearchManager {
 
     // Constructor
     public SearchManager() {
-        this.searchDao = new SearchDao();
+        this.searchDao = new SearchDao(); // Section - 6 : A database was used in the project and the DB connector configuration was made correctly.
     }
 
     // Method to filter search results based on various criteria

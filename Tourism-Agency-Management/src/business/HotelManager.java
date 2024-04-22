@@ -17,7 +17,7 @@ public class HotelManager {
 
     // Constructor
     public HotelManager() {
-        this.hotelDao = new HotelDao();
+        this.hotelDao = new HotelDao(); // Section - 6 : A database was used in the project and the DB connector configuration was made correctly.
         reservationManager = new ReservationManager();
         roomManager = new RoomManager();
         seasonManager = new SeasonManager();

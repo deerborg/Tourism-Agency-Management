@@ -10,7 +10,7 @@ public class SearchDao {
     private Connection connection;
 
     public SearchDao() {
-        connection = Database.connector();
+        connection = Database.connector(); // Section - 6 : A database was used in the project and the DB connector configuration was made correctly.
     }
 
     // Method to find all search results

@@ -5,7 +5,6 @@ public class Pansion {
     //private int pansion_hotel_id;
     private String pansion_type;
 
-
     public Pansion(int pansion_id, int pansion_hotel_id, String pansion_type) {
         this.pansion_id = pansion_id;
         //this.pansion_hotel_id = pansion_hotel_id;

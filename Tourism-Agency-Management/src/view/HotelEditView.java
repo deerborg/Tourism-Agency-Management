@@ -177,7 +177,7 @@ public class HotelEditView extends Layout {
     // Check conditions for saving or updating hotel information
     private void saveOrUpdateHotel() {
         if (Helper.isFieldListEmpty(new JTextField[]{fld_hotel_name, fld_hotel_city, fld_hotel_region, fld_hotel_adress, fld_hotel_email, fld_hotel_phone})) {
-            Helper.getMessage("Not Null", "Error");
+            Helper.getMessage("Not Null", "Error"); // Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
         } else {
             if (hotel.getHotel_id() != 0) {
                 updateHotel(); // Perform update operation
@@ -189,6 +189,8 @@ public class HotelEditView extends Layout {
 
     // Update hotel information
     private void updateHotel() {
+        // Section  10: Agency personnel can register contracted hotels into the system by entering hotel name, address, e-mail, phone number, stars and facility features information.
+
         // Set hotel details from input fields
         hotel.setHotel_name(fld_hotel_name.getText());
         hotel.setHotel_city(fld_hotel_city.getText());
@@ -216,7 +218,7 @@ public class HotelEditView extends Layout {
         String[] selectedPansionTypes = new String[selectedRows.length];
 
         for (int i = 0; i < selectedRows.length; i++) {
-            selectedPansionTypes[i] = (String) tbl_pansion_type.getValueAt(selectedRows[i], 1); // 1: Pansion Type column
+            selectedPansionTypes[i] = (String) tbl_pansion_type.getValueAt(selectedRows[i], 1);
         }
 
         // Set selected pansion types to the hotel object
@@ -226,12 +228,15 @@ public class HotelEditView extends Layout {
         hotelManager.update(hotel);
 
         // Inform the user that the update operation is successful
-        Helper.getMessage("Update", "Information");
+        Helper.getMessage("Update", "Information");  // Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
         btn_back.setText("Back");
     }
 
     // Save hotel information
     private void saveHotel() {
+
+        // Section  10: Agency personnel can register contracted hotels into the system by entering hotel name, address, e-mail, phone number, stars and facility features information.
+
         // Set hotel details from input fields
         hotel.setHotel_name(fld_hotel_name.getText());
         hotel.setHotel_city(fld_hotel_city.getText());
@@ -254,6 +259,7 @@ public class HotelEditView extends Layout {
                 fld_start_seasson.setText(String.valueOf(season.getSeason_start_date()));
                 fld_end_seasson.setText(String.valueOf(season.getSeason_end_date()));
             }
+            // Section 11 : Adds Full season by default. Detailed additions are made via the SeasonEditView class.
             if (hotel.getHotel_id() == 0) {
                 fld_start_seasson.setText("2024-01-01");
                 fld_end_seasson.setText("2024-12-31");
@@ -264,7 +270,7 @@ public class HotelEditView extends Layout {
         int[] selectedRows = tbl_pansion_type.getSelectedRows();
         String[] selectedPansionTypes = new String[selectedRows.length];
 
-        for (int i = 0; i < selectedRows.length; i++) {
+        for (int i = 0; i < selectedRows.length; i++) { // Section 12 : Hostel type management was done when hotels were added to the system.
             selectedPansionTypes[i] = tbl_pansion_type.getValueAt(selectedRows[i], 1).toString();
         }
 
@@ -275,7 +281,7 @@ public class HotelEditView extends Layout {
         hotelManager.save(hotel);
 
         // Inform the user that the save operation is successful
-        Helper.getMessage("Saved" + "\n" + "Please set a Seasson!", "Information");
+        Helper.getMessage("Saved" + "\n" + "Please set a Seasson!", "Information"); // Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
         btn_back.setText("Back");
     }
 }

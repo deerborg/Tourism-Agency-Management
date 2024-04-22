@@ -40,7 +40,7 @@ public class SeasonEditView extends Layout {
         // Add GUI components to the container
         add(container);
         // Set page attributes
-        pageArt(640, 480, "Season Edit View");
+        pageArt(640, 480, "Season Edit View");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
         setTheme("Nimbus");
 
         // Load hotel details if available
@@ -115,7 +115,7 @@ public class SeasonEditView extends Layout {
     private void saveOrUpdateHotel() {
         // Check if start and end dates are empty
         if (Helper.isFieldListEmpty(new JTextField[]{fld_season_start_date, fld_season_end_date})) {
-            Helper.getMessage("Not Null", "Error");
+            Helper.getMessage("Not Null", "Error");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
         } else {
             // If season ID is not 0, update season details
             if (season.getSeason_id() != 0) {
@@ -138,7 +138,7 @@ public class SeasonEditView extends Layout {
         season.setSeason_end_date(LocalDate.parse(fld_season_end_date.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         seasonManager.update(season);
 
-        Helper.getMessage("Update", "Information");
+        Helper.getMessage("Update", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
         btn_season_back.setText("Back");
     }
 
@@ -152,7 +152,7 @@ public class SeasonEditView extends Layout {
         season.setSeason_start_date(LocalDate.parse(fld_season_start_date.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         season.setSeason_end_date(LocalDate.parse(fld_season_end_date.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         seasonManager.save(season);
-        Helper.getMessage("Saved", "Information");
+        Helper.getMessage("Saved", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
         btn_season_back.setText("Back");
     }
 }

@@ -59,7 +59,7 @@ public class UserView extends Layout {
         });
 
         // Button to add new user
-        btn_new.addActionListener(new ActionListener() {
+        btn_new.addActionListener(new ActionListener() { // Section - 7,8 : The admin user type has been coded so that it can perform operations such as employee listing, adding, updating and deleting mentioned in the project.
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open the UserEditView for adding a new user
@@ -83,19 +83,19 @@ public class UserView extends Layout {
         });
 
         // Delete button action listener
-        btn_delete.addActionListener(new ActionListener() {
+        btn_delete.addActionListener(new ActionListener() { // Section - 7,8 : The admin user type has been coded so that it can perform operations such as employee listing, adding, updating and deleting mentioned in the project.
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Get the ID of the selected user
                 int selectId = (int) tbl_user_list.getValueAt(tbl_user_list.getSelectedRow(), 0);
                 // Show confirmation dialog before deleting the user
-                if (JOptionPane.showConfirmDialog(null, "Delete user?", "Confirm", JOptionPane.YES_NO_OPTION) == 0) {
+                if (JOptionPane.showConfirmDialog(null, "Delete user?", "Confirm", JOptionPane.YES_NO_OPTION) == 0) {// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                     // Delete the user from the database
                     userManager.delete(selectId);
                     // Reload the user table
                     userTableLoad();
                 } else {
-                    Helper.getMessage("Canceled", "Information");
+                    Helper.getMessage("Canceled", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 }
             }
         });
@@ -103,11 +103,11 @@ public class UserView extends Layout {
         // Edit button action listener
         btn_edit.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) { // Section - 7,8 : The admin user type has been coded so that it can perform operations such as employee listing, adding, updating and deleting mentioned in the project.
                 // Check if a row is selected in the table
                 if (tbl_user_list.getSelectedRow() <= 0) {
                     // Show error message if no user is selected
-                    Helper.getMessage("Please select a user", "Error");
+                    Helper.getMessage("Please select a user", "Error");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 } else {
                     // Get the ID of the selected user
                     int selectId = (int) tbl_user_list.getValueAt(tbl_user_list.getSelectedRow(), 0);
@@ -125,7 +125,7 @@ public class UserView extends Layout {
         });
 
         // Search button action listener
-        btn_search.addActionListener(new ActionListener() {
+        btn_search.addActionListener(new ActionListener() { // Section - 7,8 : The admin user type has been coded so that it can perform operations such as employee listing, adding, updating and deleting mentioned in the project.
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Get the selected role from the combo box
@@ -141,7 +141,7 @@ public class UserView extends Layout {
         });
 
         // Button to list all users
-        btn_list_all.addActionListener(new ActionListener() {
+        btn_list_all.addActionListener(new ActionListener() { // Section - 7,8 : The admin user type has been coded so that it can perform operations such as employee listing, adding, updating and deleting mentioned in the project.
             @Override
             public void actionPerformed(ActionEvent e) {
                 userTableLoad();
@@ -150,7 +150,7 @@ public class UserView extends Layout {
     }
 
     // Method to filter users based on role
-    public void loadUserFilter(User.Perm roleFilter) {
+    public void loadUserFilter(User.Perm roleFilter) { // Section - 7,8: The admin user type has been coded so that it can perform operations such as employee listing, adding, updating and deleting mentioned in the project.
         // Get the table model
         model = (DefaultTableModel) tbl_user_list.getModel();
         // Reset table selection

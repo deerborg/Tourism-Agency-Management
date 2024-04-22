@@ -50,13 +50,13 @@ public class UserEditView extends Layout {
         });
 
         // Save button action listener for adding or updating a user
-        btn_save.addActionListener(new ActionListener() {
+        btn_save.addActionListener(new ActionListener() { // Seciton - 7 : The admin user type has been coded so that it can perform operations such as employee listing, adding, updating and deleting mentioned in the project.
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Check if any field is empty
                 if (Helper.isFieldEmpty(fld_user_name) && Helper.isFieldEmpty(fld_password) && Helper.isFieldEmpty((JTextField) cmb_perm.getSelectedItem())) {
                     // Show error message if any field is empty
-                    Helper.getMessage("Not Null", "Error");
+                    Helper.getMessage("Not Null", "Error");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 } else {
                     // If user ID is not 0, it's an update operation
                     if (user.getUser_id() != 0) {
@@ -69,7 +69,7 @@ public class UserEditView extends Layout {
                         userManager.update(user);
 
                         // Show update confirmation message
-                        Helper.getMessage("Update a User", "Information");
+                        Helper.getMessage("Update a User", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
 
                         // Change button text to "Back" for the cancel button
                         btn_cancel.setText("Back");
@@ -84,7 +84,7 @@ public class UserEditView extends Layout {
                         userManager.save(user);
 
                         // Show save confirmation message
-                        Helper.getMessage("Saved", "Information");
+                        Helper.getMessage("Saved", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
 
                         // Change button text to "Back" for the cancel button
                         btn_cancel.setText("Back");

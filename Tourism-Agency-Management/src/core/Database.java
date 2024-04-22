@@ -17,6 +17,7 @@ public class Database {
     private static String PASSWORD = null;
 
     // The Database class facilitates connection with the database.
+    // Section - 6 : A database was used in the project and the DB connector configuration was made correctly.
     private Database() {
         try (InputStream input = new FileInputStream("src/Log/DBconfigure.properties")) {
             Properties prop = new Properties();

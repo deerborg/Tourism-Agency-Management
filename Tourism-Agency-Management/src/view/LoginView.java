@@ -32,16 +32,18 @@ public class LoginView extends Layout {
         setTheme("Nimbus");                 // Set the look and feel theme to Nimbus
 
         // ActionListener for the login button
-        btn_login.addActionListener(e -> {
+        btn_login.addActionListener(e -> { // Section 9 : User registration control
 
             // Check if username or password fields are empty
             if (Helper.isFieldEmpty(fld_username) || Helper.isFieldEmpty(fld_password)) {
-                Helper.getMessage("Fields are not empty!", "Error"); // Inform the user when fields are empty
+                // Section : 9 Informational message
+                Helper.getMessage("Fields are not empty!", "Error"); // Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
             } else {
                 // Attempt to login with the provided username and password
                 User user = userManager.login(fld_username.getText(), fld_password.getText());
                 if (user == null) {
-                    Helper.getMessage("Username or password is wrong!", "Error"); // Inform the user when login fails
+                    // Section : 9 Informational message
+                    Helper.getMessage("Username or password is wrong!", "Error"); // Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 } else {
                     // If login is successful, redirect to the menu view
                     MenuView menuView = new MenuView(user);

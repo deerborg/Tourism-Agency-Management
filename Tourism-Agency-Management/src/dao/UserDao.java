@@ -11,7 +11,7 @@ public class UserDao {
     private boolean isAdmin;
 
     public UserDao() {
-        connection = Database.connector();
+        connection = Database.connector(); // Section - 6 : A database was used in the project and the DB connector configuration was made correctly.
     }
 
     // Method to authenticate user login

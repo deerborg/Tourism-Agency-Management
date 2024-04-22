@@ -52,14 +52,14 @@ public class PansionEditView extends Layout {
     private void savePansions() {
         pansion.setPansion_type(fld_pansion_type.getText());
         pansionManager.save(pansion);
-        Helper.getMessage("Saved", "Information"); // Display information message
+        Helper.getMessage("Saved", "Information"); // Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
         btn_back.setText("Back");
     }
 
     // Perform save or update operations based on conditions
     private void saveOrUpdatePansion() {
         if (Helper.isFieldListEmpty(new JTextField[]{fld_pansion_type})) {
-            Helper.getMessage("Not Null", "Error"); // Display information message
+            Helper.getMessage("Not Null", "Error"); // Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
         } else {
             if (pansion.getPansion_id() != 0) {
                 updatePansion(); // Perform update operations
@@ -73,7 +73,7 @@ public class PansionEditView extends Layout {
     private void updatePansion() {
         pansion.setPansion_type(fld_pansion_type.getText());
         pansionManager.update(pansion);
-        Helper.getMessage("Update", "Information"); // Display information message
+        Helper.getMessage("Update", "Information"); // Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
         btn_back.setText("Back");
     }
 

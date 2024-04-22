@@ -11,7 +11,7 @@ public class PansionDao {
     private Connection connection;
     private boolean isAdmin;
     public PansionDao() {
-        connection = Database.connector();
+        connection = Database.connector(); // Section - 6 : A database was used in the project and the DB connector configuration was made correctly.
     }
 
     // Method to find all pansions

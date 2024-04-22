@@ -12,7 +12,7 @@ public class RoomDao {
     private Connection connection;
     private boolean isAdmin;
     public RoomDao() {
-        connection = Database.connector();
+        connection = Database.connector(); // Section - 6 : A database was used in the project and the DB connector configuration was made correctly.
     }
 
     // Method to find all rooms

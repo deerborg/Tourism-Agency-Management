@@ -91,12 +91,12 @@ public class ReservationView extends Layout {
         });
 
         // Create reservation button action
-        btn_search_create_reservation.addActionListener(new ActionListener() {
+        btn_search_create_reservation.addActionListener(new ActionListener() { // Section 20 : Agency employees can successfully list the reservations made through the system.
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Create reservation if a hotel is selected
                 if (tbl_search_list.getSelectedRow() < 0) {
-                    Helper.getMessage("Please select a Hotel", "Error");
+                    Helper.getMessage("Please select a Hotel", "Error");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 } else {
                     int selectRoomId = (int) tbl_search_list.getValueAt(tbl_search_list.getSelectedRow(), 1);
                     int selectSeasonId = (int) tbl_search_list.getValueAt(tbl_search_list.getSelectedRow(), 0);
@@ -132,13 +132,13 @@ public class ReservationView extends Layout {
         });
 
         // Delete reservation button action
-        btn_reservation_list_delete.addActionListener(new ActionListener() {
+        btn_reservation_list_delete.addActionListener(new ActionListener() { // Section 22 : Agency employees can successfully delete reservations made through the system.
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Delete reservation
                 int selectId = (int) tbl_reservation_list.getValueAt(tbl_reservation_list.getSelectedRow(), 0);
                 int selectRoom = (int) tbl_reservation_list.getValueAt(tbl_reservation_list.getSelectedRow(), 2);
-                int stock = roomManager.getById(selectRoom).getRoom_stock_quantity();
+                int stock = roomManager.getById(selectRoom).getRoom_stock_quantity(); // Section 23 : After deleting the reservation, the stock of the relevant room increases
                 stock++;
 
                 for (Room room : roomManager.findByAll()) {
@@ -154,7 +154,7 @@ public class ReservationView extends Layout {
         });
 
         // Edit reservation button action
-        btn_reservation_list_edit.addActionListener(new ActionListener() {
+        btn_reservation_list_edit.addActionListener(new ActionListener() { // Section 21 : Agency employees can successfully update the reservations made through the system.
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Edit reservation
@@ -208,7 +208,7 @@ public class ReservationView extends Layout {
     }
 
     // Load reservation table
-    public void reservationTableLoad() {
+    public void reservationTableLoad() { // Section 20 : Agency employees can successfully list the reservations made through the system.
         model = (DefaultTableModel) tbl_reservation_list.getModel();
         model.setRowCount(0); // Clear table
 
@@ -243,7 +243,7 @@ public class ReservationView extends Layout {
         // Search button action
         btn_search.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) { // Section 15 - 16 : Agency employees can successfully search for rooms by date range, hotel name and city.
                 model.setRowCount(0); // Clear table
 
                 ComboItem selectItem = (ComboItem) cmb_search_hotel_name.getSelectedItem();

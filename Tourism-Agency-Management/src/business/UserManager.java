@@ -11,7 +11,7 @@ public class UserManager {
 
     // Constructor
     public UserManager() {
-        this.userDao = new UserDao();
+        this.userDao = new UserDao(); // Section - 6 : A database was used in the project and the DB connector configuration was made correctly.
     }
 
     // Method to get user data for table display

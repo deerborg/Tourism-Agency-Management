@@ -101,7 +101,7 @@ public class ReservationEditView extends Layout {
     // Save or update reservation data based on conditions
     private void saveOrUpdateReservation() {
         if (Helper.isFieldListEmpty(new JTextField[]{fld_mpno, fld_id, fld_fullname, fld_email, fld_check_in, fld_child_count, fld_chekc_out, fld_adult_count})) {
-            Helper.getMessage("Not Null", "Error"); // Display an error message if fields are empty
+            Helper.getMessage("Not Null", "Error"); // Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
         } else {
             if (reservation.getReservation_id() != 0) {
                 updateReservation();                // Update reservation data
@@ -112,7 +112,7 @@ public class ReservationEditView extends Layout {
     }
 
     // Update existing reservation data
-    private void updateReservation() {
+    private void updateReservation() { // Section 17-18 : The price of the accommodation is successfully calculated based on guest information, number of nights to stay and room price.
         int stock = room.getRoom_stock_quantity();
 
         reservation.setReservation_guest_fullname(fld_fullname.getText());
@@ -141,11 +141,11 @@ public class ReservationEditView extends Layout {
 
         // If the duration exceeds the season limit, show an information message
         if (seasonStart > 0 || seasonEnd < 0) {
-            Helper.getMessage("Exceed Season", "Information");
+            Helper.getMessage("Exceed Season", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
         } else {
             // If the duration is negative, show an information message
             if (daysBetween < 0) {
-                Helper.getMessage("Please enter correct date", "Information");
+                Helper.getMessage("Please enter correct date", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
             } else if (daysBetween == 0) {
                 // If the stay is on the same day, calculate for 1 night
                 if (stock > 0) {
@@ -154,14 +154,14 @@ public class ReservationEditView extends Layout {
                     totalPrice = (adult + child) * daysBetween;
                     reservation.setReservation_totol_price((int) totalPrice);
                     reservationManager.update(reservation);
-                    Helper.getMessage("Saved", "Information");
+                    Helper.getMessage("Saved", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                     lbl_total_price.setText(String.valueOf(totalPrice) + "₺");
                     btn_search_cancel.setText("Back");
                     roomManager.stockCheck(room);
                     roomManager.saveReservation(room);
                 } else {
                     // If there are no available rooms, show an information message
-                    Helper.getMessage("Out of Room stock", "Information");
+                    Helper.getMessage("Out of Room stock", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 }
             } else {
                 // Otherwise, save the reservation data
@@ -169,20 +169,20 @@ public class ReservationEditView extends Layout {
                     room.setRoom_stock_quantity(stock);
                     reservation.setReservation_totol_price((int) totalPrice);
                     reservationManager.update(reservation);
-                    Helper.getMessage("Saved", "Information");
+                    Helper.getMessage("Saved", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                     btn_search_cancel.setText("Back");
                     lbl_total_price.setText(String.valueOf(totalPrice));
                     roomManager.stockCheck(room);
                 } else {
                     // If there are no available rooms, show an information message
-                    Helper.getMessage("Out of Room stock", "Information");
+                    Helper.getMessage("Out of Room stock", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 }
             }
         }
     }
 
     // Save new reservation data
-    private void saveReservation() {
+    private void saveReservation() { // Section 17-18-19 : The price of the accommodation is successfully calculated based on guest information, number of nights to stay and room price. Inventory of booking changes is running low.
         int stock = room.getRoom_stock_quantity();
         String currentDate = java.time.LocalDate.now().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
@@ -216,11 +216,11 @@ public class ReservationEditView extends Layout {
 
         // If the duration exceeds the season limit, show an information message
         if (seasonStart > 0 || seasonEnd < 0) {
-            Helper.getMessage("Exceed Season", "Information");
+            Helper.getMessage("Exceed Season", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
         } else {
             // If the duration is negative, show an information message
             if (daysBetween < 0) {
-                Helper.getMessage("Please enter correct date", "Information");
+                Helper.getMessage("Please enter correct date", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
             } else if (daysBetween == 0) {
                 // If the stay is on the same day, calculate for 1 night
                 if (stock > 0) {
@@ -230,14 +230,14 @@ public class ReservationEditView extends Layout {
                     totalPrice = (adult + child) * daysBetween;
                     reservation.setReservation_totol_price((int) totalPrice);
                     reservationManager.save(reservation);
-                    Helper.getMessage("Saved", "Information");
+                    Helper.getMessage("Saved", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                     lbl_total_price.setText(String.valueOf(totalPrice) + "₺");
                     btn_search_cancel.setText("Back");
                     roomManager.stockCheck(room);
                     roomManager.saveReservation(room);
                 } else {
                     // If there are no available rooms, show an information message
-                    Helper.getMessage("Out of Room stock", "Information");
+                    Helper.getMessage("Out of Room stock", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 }
             } else {
                 // Otherwise, save the reservation data
@@ -246,13 +246,13 @@ public class ReservationEditView extends Layout {
                     room.setRoom_stock_quantity(stock);
                     reservation.setReservation_totol_price((int) totalPrice);
                     reservationManager.save(reservation);
-                    Helper.getMessage("Saved", "Information");
+                    Helper.getMessage("Saved", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                     btn_search_cancel.setText("Back");
                     lbl_total_price.setText(String.valueOf(totalPrice));
                     roomManager.stockCheck(room);
                 } else {
                     // If there are no available rooms, show an information message
-                    Helper.getMessage("Out of Room stock", "Information");
+                    Helper.getMessage("Out of Room stock", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
                 }
             }
         }

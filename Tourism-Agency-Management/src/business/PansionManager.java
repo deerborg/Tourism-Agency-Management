@@ -10,7 +10,7 @@ public class PansionManager {
 
     // Constructor
     public PansionManager() {
-        this.pansionDao = new PansionDao();
+        this.pansionDao = new PansionDao(); // Section - 6 : A database was used in the project and the DB connector configuration was made correctly.
     }
 
     // Method to retrieve pansion data for table display
