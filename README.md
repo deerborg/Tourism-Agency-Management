@@ -4,6 +4,10 @@
 
 This project is a hotel management system developed to digitize the daily operations of Patika Tourism Agency and optimize customer reservation processes.
 
+##
+---
+    Requires Java 21.0.2 to be controlled
+
 ## Features
 
 - There are two types of users: admin and agency staff.
