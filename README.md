@@ -6,7 +6,7 @@ This project is a hotel management system developed to digitize the daily operat
 
 ##
 ---
-    Requires Java 21.0.2 to be controlled
+    Requires Java 22.0.0 to be controlled
 
 ## Features
 
