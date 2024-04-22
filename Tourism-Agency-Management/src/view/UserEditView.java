@@ -57,6 +57,7 @@ public class UserEditView extends Layout {
                 if (Helper.isFieldEmpty(fld_user_name) && Helper.isFieldEmpty(fld_password) && Helper.isFieldEmpty((JTextField) cmb_perm.getSelectedItem())) {
                     // Show error message if any field is empty
                     Helper.getMessage("Not Null", "Error");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
+
                 } else {
                     // If user ID is not 0, it's an update operation
                     if (user.getUser_id() != 0) {
@@ -65,29 +66,37 @@ public class UserEditView extends Layout {
                         user.setUser_pass(fld_password.getText());
                         user.setPerm(User.Perm.valueOf(cmb_perm.getSelectedItem().toString()));
 
-                        // Update user in the database
-                        userManager.update(user);
+                        if(!userManager.update(user)){
+                            Helper.getMessage("User Already Exist","Information");
+                        }else{
+                            // Update user in the database
+                            userManager.update(user);
+                            // Show update confirmation message
+                            Helper.getMessage("Update a User", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
 
-                        // Show update confirmation message
-                        Helper.getMessage("Update a User", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
-
-                        // Change button text to "Back" for the cancel button
-                        btn_cancel.setText("Back");
-
+                            // Change button text to "Back" for the cancel button
+                            btn_cancel.setText("Back");
+                        }
                     } else { // If user ID is 0, it's an add operation
                         // Set user data
+
                         user.setUser_name(fld_user_name.getText());
                         user.setUser_pass(fld_password.getText());
                         user.setPerm(User.Perm.valueOf(cmb_perm.getSelectedItem().toString()));
 
-                        // Save user in the database
-                        userManager.save(user);
+                        if(!userManager.save(user)){
+                            Helper.getMessage("User Already Exist","Information");
+                        }else{
+                            // Save user in the database
+                            userManager.save(user);
 
-                        // Show save confirmation message
-                        Helper.getMessage("Saved", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
+                            // Show save confirmation message
+                            Helper.getMessage("Saved", "Information");// Seciton 24-25 : The user is given appropriate pop up messages for successful transactions. Appropriate error messages are given to the user for incorrect operations.
 
-                        // Change button text to "Back" for the cancel button
-                        btn_cancel.setText("Back");
+                            // Change button text to "Back" for the cancel button
+                            btn_cancel.setText("Back");
+                        }
+
                     }
                 }
             }

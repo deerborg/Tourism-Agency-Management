@@ -227,7 +227,7 @@ public class RoomEditView extends Layout {
         ComboItem items = (ComboItem) cmb_hotel_name.getSelectedItem();
         room.setRoom_hotel_id(items.getKey());
         room.setRoom_hotel_name(items.getValue());
-        room.setRoom_hotel_city(items.getMoreVelue());
+        room.setRoom_hotel_city(items.getMoreValue());
 
         room.setRoomType(Room.Type.valueOf(cmb_room_type.getSelectedItem().toString()));
         room.setRoom_number(fld_room_number.getText());

@@ -4,25 +4,25 @@ package core;
 public class ComboItem {
     private int key;        // The key of the item
     private String value;   // The value of the item
-    private String moreVelue;
+    private String moreValue;
     // Constructor for ComboItem
     public ComboItem(int key, String value) {
         this.key = key;
         this.value = value;
     }
 
-    public ComboItem(int key, String value, String moreVelue) {
+    public ComboItem(int key, String value, String moreValue) {
         this.key = key;
         this.value = value;
-        this.moreVelue = moreVelue;
+        this.moreValue = moreValue;
     }
 
-    public String getMoreVelue() {
-        return moreVelue;
+    public String getMoreValue() {
+        return moreValue;
     }
 
-    public void setMoreVelue(String moreVelue) {
-        this.moreVelue = moreVelue;
+    public void setMoreValue(String moreValue) {
+        this.moreValue = moreValue;
     }
 
     // toString() method returns the value of the item

@@ -1,5 +1,6 @@
 package business;
 
+import core.Helper;
 import dao.UserDao;
 import entity.User;
 
@@ -47,12 +48,20 @@ public class UserManager {
 
     // Method to save a user
     public boolean save(User user){
-        return userDao.save(user);
+        try {
+            return userDao.save(user);
+        }catch (Exception e){
+            return false;
+        }
     }
 
     // Method to update a user
     public boolean update(User user){
-        return userDao.update(user);
+        try {
+            return userDao.update(user);
+        }catch (Exception e){
+            return false;
+        }
     }
 
     // Method to get a user by ID
