@@ -4,6 +4,30 @@
 
 This project is a hotel management system developed to digitize the daily operations of Patika Tourism Agency and optimize customer reservation processes.
 
+
+
+## Opening the Project
+
+1. Open the main folder where the `src` directory is located to start the project.
+
+2. You cannot start the project without opening the main folder because the file path will not be found.
+
+3. It is necessary to open the folder where the project is located completely.
+
+4. **Important Note:** If you open the entire folder, you need to correct the path `"src/Log/DBconfigure.properties"` in the `Database.java` file. The correct path should be `Tourism-Agency-Management/Tourism-Agency-Management/src/Log/DBconfigure.properties`.
+
+## Requirements
+
+- Java 22 or higher version.
+- [PostgreSQL JDBC driver](https://jdbc.postgresql.org/download.html) (e.g., postgresql-42.7.3.jar)
+
+## Adding the Library
+
+1. Add the downloaded PostgreSQL JDBC driver (e.g., `postgresql-42.7.3.jar`) file to your project's directory structure.
+
+2. After opening your project, add this library to your project in your IDE or the tool you use for compilation. This step ensures that the JDBC driver can be used when compiling the project.
+
+
 ##
 ---
     Requires Java 22.0.0 to be controlled

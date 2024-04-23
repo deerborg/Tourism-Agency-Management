@@ -19,6 +19,7 @@ public class Database {
     // The Database class facilitates connection with the database.
     // Section - 6 : A database was used in the project and the DB connector configuration was made correctly.
     private Database() {
+        // **Important Note:** If you open the entire folder, you need to correct the path `"src/Log/DBconfigure.properties"` in the `Database.java` file. The correct path should be `Tourism-Agency-Management/Tourism-Agency-Management/src/Log/DBconfigure.properties`.
         try (InputStream input = new FileInputStream("src/Log/DBconfigure.properties")) {
             Properties prop = new Properties();
             prop.load(input);
@@ -44,6 +45,7 @@ public class Database {
     public static Connection connector() {
         SimpleDateFormat format = new SimpleDateFormat();
         Date date = new Date();
+        // **Important Note:** If you open the entire folder, you need to correct the path `"src/Log/DBconfigure.properties"` in the `Database.java` file. The correct path should be `Tourism-Agency-Management/Tourism-Agency-Management/src/Log/dataLog.txt`.
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Log/dataLog.txt", true))) {
             try {
                 if (connector == null || connector.getConnection().isClosed()) {

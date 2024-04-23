@@ -35,12 +35,11 @@ public class UserEditView extends Layout {
             fld_password.setText(user.getUser_pass());
             cmb_perm.addItem(user.getPerm());
         }
-
         // Populate combo box with permission values
+        cmb_perm.removeAllItems();
         for (User.Perm perm : User.Perm.values()) {
             cmb_perm.addItem(perm.toString());
         }
-
         // Cancel button action listener to dispose the window
         btn_cancel.addActionListener(new ActionListener() {
             @Override
@@ -66,9 +65,9 @@ public class UserEditView extends Layout {
                         user.setUser_pass(fld_password.getText());
                         user.setPerm(User.Perm.valueOf(cmb_perm.getSelectedItem().toString()));
 
-                        if(!userManager.update(user)){
-                            Helper.getMessage("User Already Exist","Information");
-                        }else{
+                        if (!userManager.update(user)) {
+                            Helper.getMessage("User Already Exist", "Information");
+                        } else {
                             // Update user in the database
                             userManager.update(user);
                             // Show update confirmation message
@@ -84,9 +83,9 @@ public class UserEditView extends Layout {
                         user.setUser_pass(fld_password.getText());
                         user.setPerm(User.Perm.valueOf(cmb_perm.getSelectedItem().toString()));
 
-                        if(!userManager.save(user)){
-                            Helper.getMessage("User Already Exist","Information");
-                        }else{
+                        if (!userManager.save(user)) {
+                            Helper.getMessage("User Already Exist", "Information");
+                        } else {
                             // Save user in the database
                             userManager.save(user);
 
